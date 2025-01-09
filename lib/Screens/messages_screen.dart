@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template_project/Screens/Home_screen.dart';
+import 'package:template_project/Screens/home_screen.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});
@@ -47,8 +48,7 @@ class MessagesScreen extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-      ),
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      )
     );
   }
 }
