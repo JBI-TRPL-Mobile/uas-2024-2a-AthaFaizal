@@ -1,93 +1,127 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
+import 'welcome_screen.dart'; // Import WelcomeScreen untuk navigasi
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  Map<String, dynamic> user = {};
-
-  @override
-  void initState() {
-    super.initState();
-    loadUserData();
-  }
-
-  Future<void> loadUserData() async {
-    final String response = await rootBundle.loadString('assets/datauser.json');
-    final data = json.decode(response);
-    setState(() {
-      user = data;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: user.isEmpty
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: 40,
-                child: Text(
-                  user['name'][0],
-                  style: const TextStyle(fontSize: 32),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: 30),
+          const Center(
+            child: Text(
+              "Profile",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(height: 20),
+          const Center(
+            child: CircleAvatar(
+              radius: 50,
+              child: Icon(Icons.person, size: 50),
+            ),
+          ),
+          const SizedBox(height: 20),
+          const Divider(thickness: 1, color: Colors.grey),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              children: [
+                _buildSection("Video preference", [
+                  "Download Option",
+                  "Video playback options",
+                ]),
+                _buildSection("Account Settings", [
+                  "Account Security",
+                  "Email Notification Preferences",
+                  "Learning Reminders",
+                ]),
+                _buildSection("About Learnout", [
+                  "Frequently Asked Questions",
+                  "Share the Learnout App",
+                ]),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  _showLogoutDialog(context); // Menampilkan pop-up konfirmasi
+                },
+                child: const Text(
+                  "Log Out",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Text(
-              "Name: ${user['name']}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Email: ${user['email']}",
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSection(String title, List<String> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        ...items.map((item) => ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(item),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          onTap: () {
+            // Tambahkan aksi di sini
+          },
+        )),
+        const SizedBox(height: 16),
+      ],
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text("Confirm Logout"),
+          content: const Text("Are you sure you want to log out?"),
+          actions: [
+            TextButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: const Text("Log Out"),
-                    content: const Text("Are you sure you want to log out?"),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text("Cancel"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/signin');
-                        },
-                        child: const Text("Log Out"),
-                      ),
-                    ],
-                  ),
-                );
+                Navigator.pop(context); // Tutup pop-up jika tekan "Cancel"
               },
-              child: const Text("Log Out"),
+              child: const Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Tutup pop-up
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+                ); // Navigasi ke Welcome Screen
+              },
+              child: const Text(
+                "Log Out",
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
