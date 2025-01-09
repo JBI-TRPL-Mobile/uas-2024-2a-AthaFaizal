@@ -13,6 +13,20 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   bool _isPasswordVisible = false;
 
+  void _login() {
+    if (emailController.text == 'Atta@gmail.com' &&
+        passwordController.text == '123') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login failed. Please try again.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(
-                  labelText: 'Enter Email',
+                  labelText: 'Email',
                   border: OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.white,
@@ -63,7 +77,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   labelText: 'Password',
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      _isPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                     onPressed: () {
                       setState(() {
@@ -90,23 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  final email = emailController.text;
-                  final password = passwordController.text;
-
-
-                  if (email.isNotEmpty && password.isNotEmpty) {
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please fill all fields')),
-                    );
-                  }
-                },
+                onPressed: _login,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                   padding: const EdgeInsets.symmetric(vertical: 14),
@@ -129,7 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -148,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -176,7 +174,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // Navigate to sign up page
                       Navigator.pushNamed(context, '/signup');
                     },
                     child: const Text(
