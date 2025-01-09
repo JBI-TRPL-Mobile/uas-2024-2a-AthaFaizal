@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert'; // To parse JSON data
+import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
 class ProfileScreen extends StatefulWidget {
