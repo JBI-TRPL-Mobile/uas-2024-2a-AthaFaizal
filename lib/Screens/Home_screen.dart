@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blueAccent,
         title: Text(
           _currentIndex == 0
-              ? 'Welcome Atha'
+              ? 'Welcome Atta'
               : _currentIndex == 1
               ? 'Messages'
               : _currentIndex == 3
@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: _screens[_currentIndex], // Ganti body sesuai index
+      body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blueAccent,
@@ -86,7 +86,6 @@ class HomeScreenContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // "Keep Moving Up" Section
           const Text(
             "Keep Moving Up",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
@@ -98,7 +97,6 @@ class HomeScreenContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Categories Section
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -129,7 +127,6 @@ class HomeScreenContent extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Top Courses Section
           const Text(
             "Top Courses",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blue),
