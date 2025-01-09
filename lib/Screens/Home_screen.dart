@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blueAccent,
         title: Text(
           _currentIndex == 0
-              ? 'Welcome William'
+              ? 'Welcome Atha'
               : _currentIndex == 1
               ? 'Messages'
               : _currentIndex == 3
