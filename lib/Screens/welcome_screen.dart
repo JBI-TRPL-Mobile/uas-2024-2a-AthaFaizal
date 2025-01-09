@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               const Text(
-                "Lorem ipsum dolorr sit amet, consectetur adipiscing elit, sed do.",
+                "Lorem ipsum dolorr sit amett, consectetur adipiscing elit, sed do.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
