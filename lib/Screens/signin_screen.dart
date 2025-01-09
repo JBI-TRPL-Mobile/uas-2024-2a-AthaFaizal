@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -80,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    // Logic forgot password
                   },
                   child: const Text(
                     'Forgot Password?',
@@ -94,12 +94,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   final email = emailController.text;
                   final password = passwordController.text;
 
-                  // Logic untuk login
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Email: $email\nPassword: $password'),
-                    ),
-                  );
+
+                  if (email.isNotEmpty && password.isNotEmpty) {
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Please fill all fields')),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
@@ -123,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      // Google login logic
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -142,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-                      // Facebook login logic
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

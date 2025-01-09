@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:template_project/Screens/Home_screen.dart';
-import 'package:template_project/Screens/messages_screen.dart';
+import 'package:template_project/Screens/signin_screen.dart';
+import 'package:template_project/Screens/signup_screen.dart';
 import 'package:template_project/Screens/welcome_screen.dart';
+import 'package:template_project/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +14,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: 'Wireframe App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MessagesScreen(),
+      initialRoute: '/welcome',
+      routes: {
+        '/welcome': (context) => const WelcomeScreen(),
+        '/signin': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+        '/home': (context) => const HomeScreen(),
+      },
     );
   }
 }
